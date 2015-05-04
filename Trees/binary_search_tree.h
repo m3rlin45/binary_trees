@@ -76,8 +76,13 @@ namespace trees {
 				node->value = node->right->value;
 				my_remove(node->right.get());
 			}
-			else { //it has two children
-
+			else { //it has two children, find the rightmost value in the left subtree, move that up and delete it
+				auto newVal = node->left.get();
+				while (newVal->right.get()) {
+					newVal = newVal->right.get();
+				}
+				node->value = newVal->value;
+				my_remove(newVal);
 			}
 		}
 
